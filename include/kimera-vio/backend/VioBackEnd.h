@@ -129,6 +129,7 @@ class VioBackEnd {
 
   void initializeBackend(const BackendInput& input) {
     CHECK(backend_state_ == BackendState::Bootstrap);
+    LOG(INFO) << "[MILO] initializeBackend() called!" << std::endl;
     switch (backend_params_.autoInitialize_) {
       case 0: {
         initializeFromGt(input);
@@ -148,6 +149,8 @@ class VioBackEnd {
     // If the gtNavState is identity, the params provider probably did a
     // mistake, although it can happen that the ground truth initial pose is
     // identity, but this is super unlikely
+    LOG(INFO) << "[MILO] initializeFromGt()" << std::endl;
+    std::cout << "[MILO] initial_ground_truth_state_: " << backend_params_.initial_ground_truth_state_.pose_ << std::endl;
     CHECK(!backend_params_.initial_ground_truth_state_.equals(VioNavState()))
         << "Requested initialization from Ground-Truth pose but got an "
            "identity pose: did you parse your ground-truth correctly?";

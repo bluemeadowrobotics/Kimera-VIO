@@ -4,8 +4,7 @@
 
 # Specify path of the EuRoC dataset.
 # The path can be absolute, or relative to this file location.
-# DATASET_PATH="/path/to/euroc/dataset"
-DATASET_PATH="/home/milo/datasets/euroc/V1_01_EASY"
+DATASET_PATH="/home/milo/datasets/Unity3D/farmsim/euroc_01_seafloor/"
 
 # Specify: 0 to run on EuRoC data, 1 to run on Kitti (not supported)
 DATASET_TYPE=0
@@ -25,7 +24,7 @@ LOG_OUTPUT=0
 BUILD_PATH="../build"
 
 # Params path: specify where the parameters for Kimera are.
-PARAMS_PATH="../params/Euroc"
+PARAMS_PATH="../params/FarmSim"
 
 # Vocabulary path: specify where the vocabulary for loop closure is.
 VOCABULARY_PATH="../vocabulary"
@@ -88,7 +87,7 @@ echo """ Launching:
 $BUILD_PATH/stereoVIOEuroc \
   --dataset_type="$DATASET_TYPE" \
   --dataset_path="$DATASET_PATH" \
-  --initial_k=50 \
+  --initial_k=10 \
   --final_k=2000 \
   --params_folder_path="$PARAMS_PATH" \
   --use_lcd="$USE_LCD" \

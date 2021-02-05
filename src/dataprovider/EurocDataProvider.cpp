@@ -135,6 +135,8 @@ bool EurocDataProvider::spinOnce() {
     return false;
   }
 
+  LOG(INFO) << "[MILO] spinOnce() called" << std::endl;
+
   const CameraParams& left_cam_info = pipeline_params_.camera_params_.at(0);
   const CameraParams& right_cam_info = pipeline_params_.camera_params_.at(1);
   const bool& equalize_image =
@@ -203,6 +205,7 @@ void EurocDataProvider::parse() {
   if (VLOG_IS_ON(1)) print();
 
   // Send first ground-truth pose to VIO for initialization if requested.
+  // NOTE(milo): If groundtruth hasn't been set, this initial ground truth state will be garbage!
   if (pipeline_params_.backend_params_->autoInitialize_ == 0) {
     // We want to initialize from ground-truth.
     pipeline_params_.backend_params_->initial_ground_truth_state_ =
@@ -326,8 +329,16 @@ bool EurocDataProvider::parseGtData(const std::string& input_dataset_path,
   std::string filename_data =
       input_dataset_path + "/mav0/" + gt_sensor_name + "/data.csv";
   std::ifstream fin(filename_data.c_str());
-  CHECK(fin.is_open()) << "Cannot open file: " << filename_data << '\n'
-                       << "Assuming dataset has no ground truth...";
+
+  // NOTE(milo): If no groundtruth available, return early.
+  if (!fin.is_open()) {
+    std::cout << "Cannot open file: " << filename_data << std::endl;
+    std::cout << "Assuming dataset has no ground truth" << std::endl;
+    return false;
+  }
+
+  // CHECK(fin.is_open()) << "Cannot open file: " << filename_data << '\n'
+                      //  << "Assuming dataset has no ground truth...";
 
   // Skip the first line, containing the header.
   std::string line;

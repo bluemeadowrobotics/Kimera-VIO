@@ -13,6 +13,9 @@
  * @author Luca Carlone
  */
 
+
+// TODO(milo): THIS IS WHERE THE ACTUAL WORK IS DONE! SO MUCH INDIRECTION IN THIS CODE ...
+
 #include "kimera-vio/frontend/StereoVisionFrontEnd.h"
 
 #include <gflags/gflags.h>
@@ -94,6 +97,8 @@ FrontendOutput::UniquePtr StereoVisionFrontEnd::bootstrapSpin(
     const StereoFrontEndInputPayload& input) {
   CHECK(frontend_state_ == FrontendState::Bootstrap);
 
+  LOG(INFO) << "[MILO] BOOTSTRAP SPIN" << std::endl;
+
   // Initialize members of the frontend
   processFirstStereoFrame(input.getStereoFrame());
 
@@ -116,6 +121,9 @@ FrontendOutput::UniquePtr StereoVisionFrontEnd::bootstrapSpin(
 FrontendOutput::UniquePtr StereoVisionFrontEnd::nominalSpin(
     const StereoFrontEndInputPayload& input) {
   CHECK(frontend_state_ == FrontendState::Nominal);
+
+  LOG(INFO) << "[MILO] NOMINAL SPIN" << std::endl;
+
   // For timing
   utils::StatsCollector timing_stats_frame_rate("VioFrontEnd Frame Rate [ms]");
   utils::StatsCollector timing_stats_keyframe_rate(
@@ -267,7 +275,8 @@ void StereoVisionFrontEnd::processFirstStereoFrame(
   feature_detector_->featureDetection(left_frame);
 
   // Get 3D points via stereo.
-  stereoFrame_k_->sparseStereoMatching();
+  // TODO(milo): Set back to verbosity = 0.
+  stereoFrame_k_->sparseStereoMatching(1);
 
   // Prepare for next iteration.
   stereoFrame_km1_ = stereoFrame_k_;

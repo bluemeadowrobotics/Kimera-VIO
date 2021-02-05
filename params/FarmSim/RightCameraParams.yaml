@@ -1,0 +1,24 @@
+%YAML:1.0
+# General sensor definitions.
+camera_id: right_cam
+
+# Sensor extrinsics wrt. the body-frame.
+# NOTE(milo): We define the body frame to be the same as the left camera.
+# NOTE(milo): The right camera is located at +0.2m in the x-direction.
+T_BS:
+  cols: 4
+  rows: 4
+  data: [1.0, 0.0, 0.0, 0.2,
+         0.0, 1.0, 0.0, 0.0,
+         0.0, 0.0, 1.0, 0.0,
+         0.0, 0.0, 0.0, 1.0]
+
+# Camera specific definitions.
+rate_hz: 20
+resolution: [752, 480]
+camera_model: pinhole
+intrinsics: [415.876509, 415.876509, 375.5, 239.5] #fu, fv, cu, cv
+distortion_model: radial-tangential
+
+# No lens distortion.
+distortion_coefficients: [0.0, 0.0, 0.0, 0.0]

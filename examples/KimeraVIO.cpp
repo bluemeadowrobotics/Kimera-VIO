@@ -73,6 +73,8 @@ int main(int argc, char* argv[]) {
                 std::placeholders::_1));
   // We use blocking variants to avoid overgrowing the input queues (use
   // the non-blocking versions with real sensor streams)
+  // NOTE(milo): These callbacks are called by:
+  // VIO::Pipeline::Spin() --> DataProviderModule::Spin() --> DataProviderModule::SpinOnce() --> left_frame_callback_()
   dataset_parser->registerLeftFrameCallback(
       std::bind(&VIO::Pipeline::fillLeftFrameQueue,
                 &vio_pipeline,
