@@ -4,7 +4,8 @@
 
 # Specify path of the EuRoC dataset.
 # The path can be absolute, or relative to this file location.
-DATASET_PATH="/home/milo/datasets/Unity3D/farmsim/euroc_01_seafloor/"
+# NOTE(milo): No trailing slash!
+DATASET_PATH="/home/milo/datasets/Unity3D/farmsim/euroc_test1"
 
 # Specify: 0 to run on EuRoC data, 1 to run on Kitti (not supported)
 DATASET_TYPE=0

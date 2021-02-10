@@ -5,7 +5,7 @@
 --deterministic_random_number_generator=true
 
 # 2D Visualization
---visualize_feature_predictions=false
+--visualize_feature_predictions=true
 --visualize_feature_tracks=true
 
 # 3D Visualization
