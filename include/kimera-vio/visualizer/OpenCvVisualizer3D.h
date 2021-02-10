@@ -367,6 +367,7 @@ class OpenCvVisualizer3D : public Visualizer3D {
   double cam_with_pose_prior_frustum_scale_ = 0.20;
   cv::viz::Color cam_with_pose_prior_frustum_color_ = cv::viz::Color::yellow();
 
+  // NOTE(milo): Light blue lines between IMU measurements?
   cv::viz::Color btw_factor_color_ = cv::viz::Color::celestial_blue();
   double btw_factor_imu_pose_guess_active_frustum_scale_ = 0.11;
   cv::viz::Color btw_factor_imu_pose_guess_active_frustum_color_ =

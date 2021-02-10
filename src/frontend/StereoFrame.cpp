@@ -136,7 +136,6 @@ void StereoFrame::initialize(const CameraParams& cam_param_left,
 // TODO: Clean up RGBD
 // TODO: this should be in StereoMatcher
 void StereoFrame::sparseStereoMatching(const int verbosity) {
-  LOG(INFO) << "[MILO] SPARSE STEREO MATCHING" << std::endl;
   if (verbosity > 0) {
     cv::Mat leftImgWithKeypoints =
         UtilsOpenCV::DrawCircles(left_frame_.img_, left_frame_.keypoints_);
@@ -154,7 +153,7 @@ void StereoFrame::sparseStereoMatching(const int verbosity) {
                          left_frame_.cam_param_,
                          left_undistRectCameraMatrix_,
                          &left_keypoints_rectified);
-  printf("Left keypoints: %zu\n", left_keypoints_rectified.size());
+  // printf("Left keypoints: %zu\n", left_keypoints_rectified.size());
   // TODO (actually this is compensated later on in the pipeline): This should
   // be correct but largely hinders the performance of RANSAC compensate versors
   // for rectification
@@ -206,7 +205,7 @@ void StereoFrame::sparseStereoMatching(const int verbosity) {
                                      left_keypoints_rectified,
                                      fx,
                                      getBaseline());
-      printf("Right keypoints: %zu\n", right_keypoints_rectified.size());
+      // printf("Right keypoints: %zu\n", right_keypoints_rectified.size());
       break;
     case VisionSensorType::RGBD:  // just use depth to "fake right pixel
                                   // matches"

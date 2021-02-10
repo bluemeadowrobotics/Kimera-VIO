@@ -20,6 +20,8 @@
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 
+#include <opencv2/highgui.hpp>
+
 #include "kimera-vio/dataprovider/EurocDataProvider.h"
 #include "kimera-vio/dataprovider/KittiDataProvider.h"
 #include "kimera-vio/frontend/StereoImuSyncPacket.h"
@@ -104,6 +106,8 @@ int main(int argc, char* argv[]) {
     while (dataset_parser->spin() && vio_pipeline.spin()) {
       continue;
     };
+
+    vio_pipeline.spinViz();
     vio_pipeline.shutdown();
     is_pipeline_successful = true;
   }

@@ -393,7 +393,7 @@ cv::Mat UtilsOpenCV::ReadAndConvertToGrayScale(const std::string& img_name,
                                                bool equalize) {
   cv::Mat img = cv::imread(img_name, cv::IMREAD_ANYCOLOR);
   if (img.channels() > 1) {
-    LOG(WARNING) << "Converting img from BGR to GRAY...";
+    // LOG(WARNING) << "Converting img from BGR to GRAY...";
     cv::cvtColor(img, img, cv::COLOR_BGR2GRAY);
   }
   // Apply Histogram Equalization

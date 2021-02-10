@@ -69,8 +69,7 @@ void ImuFrontEnd::initializeImuFrontEnd(const ImuBias& imu_bias) {
   }
   if (VLOG_IS_ON(10)) {
     LOG(ERROR) << "IMU PREINTEGRATION PARAMS GIVEN TO IMU FRONTEND.";
-    imu_params_.print();
-    LOG(ERROR) << "IMU BIAS GIVEN TO IMU FRONTEND AT CONSTRUCTION:\n "
+    LOG(INFO) << "IMU BIAS GIVEN TO IMU FRONTEND AT CONSTRUCTION:\n "
                << getCurrentImuBias();
     LOG(ERROR) << "IMU PREINTEGRATION COVARIANCE: ";
     pim_->print("PIM type: " + std::to_string(VIO::to_underlying(
@@ -104,6 +103,8 @@ ImuFrontEnd::PimPtr ImuFrontEnd::preintegrateImuMeasurements(
     // and efficiency??
     pim_->integrateMeasurement(measured_acc, measured_omega, delta_t);
   }
+  // LOG(INFO) << "Finished pre-integration:" << std::endl;
+  // pim_->print();
   if (VLOG_IS_ON(10)) {
     LOG(INFO) << "Finished preintegration: ";
     pim_->print("PIM type: " + std::to_string(VIO::to_underlying(

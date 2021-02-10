@@ -427,7 +427,7 @@ void OpenCvVisualizer3D::visualizeFactorGraph(
 
     static constexpr bool draw_imu_pose = true;
     static constexpr bool draw_left_cam = true;
-    static constexpr bool draw_right_cam = false;
+    static constexpr bool draw_right_cam = true;
     static constexpr bool draw_imu_to_left_cam_arrow = true;
     static constexpr bool draw_velocity = false;
     if (variable_type == kLandmarkSymbolChar) {

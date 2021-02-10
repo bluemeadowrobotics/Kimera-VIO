@@ -13,9 +13,6 @@
  * @author Luca Carlone
  */
 
-
-// TODO(milo): THIS IS WHERE THE ACTUAL WORK IS DONE! SO MUCH INDIRECTION IN THIS CODE ...
-
 #include "kimera-vio/frontend/StereoVisionFrontEnd.h"
 
 #include <gflags/gflags.h>
@@ -97,8 +94,6 @@ FrontendOutput::UniquePtr StereoVisionFrontEnd::bootstrapSpin(
     const StereoFrontEndInputPayload& input) {
   CHECK(frontend_state_ == FrontendState::Bootstrap);
 
-  LOG(INFO) << "[MILO] BOOTSTRAP SPIN" << std::endl;
-
   // Initialize members of the frontend
   processFirstStereoFrame(input.getStereoFrame());
 
@@ -121,8 +116,6 @@ FrontendOutput::UniquePtr StereoVisionFrontEnd::bootstrapSpin(
 FrontendOutput::UniquePtr StereoVisionFrontEnd::nominalSpin(
     const StereoFrontEndInputPayload& input) {
   CHECK(frontend_state_ == FrontendState::Nominal);
-
-  LOG(INFO) << "[MILO] NOMINAL SPIN" << std::endl;
 
   // For timing
   utils::StatsCollector timing_stats_frame_rate("VioFrontEnd Frame Rate [ms]");

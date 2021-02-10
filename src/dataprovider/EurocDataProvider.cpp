@@ -135,8 +135,6 @@ bool EurocDataProvider::spinOnce() {
     return false;
   }
 
-  LOG(INFO) << "[MILO] spinOnce() called" << std::endl;
-
   const CameraParams& left_cam_info = pipeline_params_.camera_params_.at(0);
   const CameraParams& right_cam_info = pipeline_params_.camera_params_.at(1);
   const bool& equalize_image =
